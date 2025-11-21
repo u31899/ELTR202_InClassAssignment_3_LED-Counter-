@@ -1,0 +1,37 @@
+/* 
+=====================================================================
+******************** ASSIGNMENT REQUIREEMENTS ***********************
+=====================================================================
+- Count from binary 0-255 on LED board attached to PORT D
+- When direction button is pressed, the direction of count is reversed
+- when mode button is pressed, the led's produce a light show
+	- when direction is pressed while light show is active, 
+	  pic will return to counting up from  zero
+- button presses are uniquly registered.
+	- holding button will not register as multiple presses
+- Frequency is observable by human
+
+
+*************************** NOTES ***********************************
+
+- Will need to initialize following:
+	- count direction flag
+	- mode flag
+	- 
+
+*/ 
+
+#include <p18f4620.h>
+#include <stdio.h>
+
+// variables
+int count_flag = 0;
+int mode_flag  = 0;
+
+
+void main(void){
+
+
+
+}
+
