@@ -6,7 +6,7 @@
 - When direction button is pressed, the direction of count is reversed
 - when mode button is pressed, the led's produce a light show
 	- when direction is pressed while light show is active, 
-	  pic will return to counting up from  zero
+	  pic will return to counting up from zero
 - button presses are uniquly registered.
 	- holding button will not register as multiple presses
 - Frequency is observable by human
@@ -23,15 +23,50 @@
 
 #include <p18f4620.h>
 #include <stdio.h>
-
-// variables
-int count_flag = 0;
-int mode_flag  = 0;
+#include <delays.h>
 
 
 void main(void){
 
+// variables
+int count_flag = 0;
+int mode_flag  = 0;
+int LED_Output = 0; 
 
+// initialize ports
+	TRISC = 255; // input
+	TRISD = 0; 	 // output
+	PORTC = 0;
+	PORTD = 0;
+	while(1){
+		while(PORTCbits.RC0 == 1){
+		//count_flag = 1;
+		//mode_flag = 0;
+			if(count_flag == 0){
+			count_flag = 1;
+			}
+			else{
+			count_flag = 0;
+			}
+		}	
+		while(PORTCbits.RC1 ==1){
+		count_flag = 0;
+		mode_flag = 1;
+		}
+		if(count_flag == 0){
+			LED_Output++;
+			PORTD = LED_Output;
+			Delay10KTCYx(10);
+		}
+		else{
+			LED_Output--;
+			PORTD = LED_Output;
+			Delay10KTCYx(10);
+		}
+	
+	}		
+}		
 
-}
+	//	while(1);
+
 
