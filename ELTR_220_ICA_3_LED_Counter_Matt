@@ -38,8 +38,8 @@ int LED_Output = 0;
 	TRISD = 0; 	 // output
 	PORTC = 0;
 	PORTD = 0;
-	while(1){
-		while(PORTCbits.RC0 == 1){
+	while(1){ 
+		while(PORTCbits.RC0 == 1){ //count flag change
 		//count_flag = 1;
 		//mode_flag = 0;
 			if(count_flag == 0){
@@ -49,21 +49,29 @@ int LED_Output = 0;
 			count_flag = 0;
 			}
 		}	
-		while(PORTCbits.RC1 ==1){
+		while(PORTCbits.RC1 ==1){ //mode flag change
 		count_flag = 0;
 		mode_flag = 1;
+
 		}
-		if(count_flag == 0){
-			LED_Output++;
-			PORTD = LED_Output;
-			Delay10KTCYx(10);
+		if(mode_flag == 0){
+			if(count_flag == 0){
+				LED_Output++;
+				PORTD = LED_Output;
+				Delay10KTCYx(10);
+			}
+			else{
+				LED_Output--;
+				PORTD = LED_Output;
+				Delay10KTCYx(10);
+			}
 		}
 		else{
-			LED_Output--;
-			PORTD = LED_Output;
+			PORTD = 255;
+			Delay10KTCYx(10);
+			PORTD = 0;
 			Delay10KTCYx(10);
 		}
-	
 	}		
 }		
 
